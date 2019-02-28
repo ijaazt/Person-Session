@@ -6,15 +6,21 @@ public class Person {
     private Name name;
     private String eyeColor;
     private String hairColor;
-    private String height;
+    private Size height;
     private String weight;
+    final private Long id;
 
-    public Person(Name name, String eyeColor, String hairColor, String height, String weight) {
+    public Person(Name name, String eyeColor, String hairColor, Size height, String weight, long id) {
         this.name = name;
         this.eyeColor = eyeColor;
         this.hairColor = hairColor;
         this.height = height;
         this.weight = weight;
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public Name getName() {
@@ -41,11 +47,11 @@ public class Person {
         this.hairColor = hairColor;
     }
 
-    public String getHeight() {
+    public Size getHeight() {
         return height;
     }
 
-    public void setHeight(String height) {
+    public void setHeight(Size height) {
         this.height = height;
     }
 
@@ -62,20 +68,30 @@ public class Person {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Person person = (Person) o;
-        return name.equals(person.name) &&
-                eyeColor.equals(person.eyeColor) &&
-                hairColor.equals(person.hairColor) &&
-                height.equals(person.height) &&
-                weight.equals(person.weight);
+        return Objects.equals(name, person.name) &&
+                Objects.equals(eyeColor, person.eyeColor) &&
+                Objects.equals(hairColor, person.hairColor) &&
+                Objects.equals(height, person.height) &&
+                Objects.equals(weight, person.weight) &&
+                Objects.equals(id, person.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, eyeColor, hairColor, height, weight);
+        return Objects.hash(name, eyeColor, hairColor, height, weight, id);
     }
 
-    public String getHashCode() {
-        return String.valueOf(hashCode());
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Person{");
+        sb.append("name=").append(name);
+        sb.append(", eyeColor='").append(eyeColor).append('\'');
+        sb.append(", hairColor='").append(hairColor).append('\'');
+        sb.append(", height=").append(height);
+        sb.append(", weight='").append(weight).append('\'');
+        sb.append(", id=").append(id);
+        sb.append('}');
+        return sb.toString();
     }
 }
 
